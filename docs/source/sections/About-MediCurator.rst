@@ -45,7 +45,7 @@ About the download tracking, Medicurator supposes all kinds of dataset are manag
 
 .. image:: 3.png
    :scale: 140
-   :align: right
+   :align: center
 
 
 MediCurator is deployed as a cluster, built on Infinispan In-Memory Data Grid, such that it finds the similarity among the entries in an efficient parallel and distributed manner. Also, you can decide the storage that the MediCurator uses, the HDFS or the local storage. 

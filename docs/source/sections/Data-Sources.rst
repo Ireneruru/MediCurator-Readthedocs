@@ -1,4 +1,4 @@
-************
+***********
 Data Sources
 ************
 
@@ -36,5 +36,9 @@ Take tcia for example,
 	}
 	return rootDataSet;
     }
+
+This is not enough.
+
+Since you want to change a data source, you should change the function: "getSubsets" and the method to modify the "boolean updated" in the DataSet.java.
 
 In this way, you can have extension to any other data source as you want.
