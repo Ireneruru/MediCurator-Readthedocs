@@ -77,7 +77,7 @@ MediCurator for Users
 You can easily use MediCurator, because it is very user-friendly. It offers two main ways for you to choose, Rest API and Web-Application.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
    sections/MediCurator-REST-API
    sections/Web-Application

@@ -14,6 +14,6 @@ Especially, it has two abstract functions :
 
     public abstract byte[] getRawImage();
 
-If you want to extend to some other image format, you just need to add a class like DicomImage.java. What's the most important, you should add the way to parse the image, like appling dcm4che to parsing the dicom images.
+If you want to extend to some other image format, you just need to add a class like DicomImage.java. That means, you should add the way to parse the image, like appling dcm4che to parsing the dicom images.
 
 What's more, since you want to change an image format, you should change the function: "getImage"  and the method to modify the "boolean updated" in the DataSet.java.

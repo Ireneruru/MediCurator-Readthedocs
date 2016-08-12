@@ -19,7 +19,7 @@ You can invoke the Restful API at http://localhost:4567/.
 Details can be found below:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    restapi/Create
    restapi/Retrieve

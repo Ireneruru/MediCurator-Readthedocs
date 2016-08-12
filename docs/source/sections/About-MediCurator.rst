@@ -14,7 +14,7 @@ Near duplicate detection algorithms have been proposed and implemented in order 
 
 Traditionally, near duplicate detection algorithms are sequential and operate on a single computer. Now, In-Memory Data Grids (IMDG) offer a distributed storage and execution, giving the illusion of a single large computer over multiple computing nodes in a cluster. However, common distribution strategy and framework to parallelize the execution of the near duplicate detection algorithms is still lacking.
 
-This paper presents the research, design, and implementation of MediCurator. MediCurator is a distributed near duplicate detection framework for heterogeneous medical data sources in constructing data warehouses. MediCurator has been developed to retrieve medical data from various data sources, including MySQL, MongoDB, CSV files, and medical image archives such as TCIA, and detect the duplicates in-memory, while storing the merged data into data warehouses hosted in Hadoop Distributed File System. As a unified near duplicate detection framework for big data, Medicurator efficiently distributes the algorithms over utility computers in research labs and private clouds and grids. 
+This page presents the research, design, and implementation of MediCurator. MediCurator is a distributed near duplicate detection framework for heterogeneous medical data sources in constructing data warehouses. MediCurator has been developed to retrieve medical data from various data sources, including MySQL, MongoDB, CSV files, and medical image archives such as TCIA, and detect the duplicates in-memory, while storing the merged data into data warehouses hosted in Hadoop Distributed File System. As a unified near duplicate detection framework for big data, Medicurator efficiently distributes the algorithms over utility computers in research labs and private clouds and grids. 
 
 Methods
 #######
@@ -25,7 +25,7 @@ MediCurator integrates medical data from various heterogeneous medical data sour
 
 **Definition of the ReplicaSet**
 
-Repliaset is the directory which contents the user's interested information.
+Replicaset is the directory which contents the user's interested information.
 
 A user can have many replicasets which serves for different researches. The information in a replicaset can be downloaded, detected near duplicate on and removed and so on. Also, a user can add any interested information of any data source into the replicaset. 
 
