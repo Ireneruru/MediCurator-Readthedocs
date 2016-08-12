@@ -2,6 +2,8 @@
 Data Sources
 ************
 
+Data Sources
+############
 MediCurator version 1.0 has extensively been developed for The Cancer Imaging Archive (TCIA) and local data file system, while maintaining relevant interfaces for extension to the other data sources.
 
 

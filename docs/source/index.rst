@@ -91,8 +91,8 @@ MediCurator version 1.0 has extensively been developed for some specific environ
 .. toctree::
    :maxdepth: 3
 
-   sections/Data-Sources
    sections/Image formats
+   sections/Data-Sources
 
 Citing MediCurator
 ##################

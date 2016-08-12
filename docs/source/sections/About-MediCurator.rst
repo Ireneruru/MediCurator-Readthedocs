@@ -2,6 +2,9 @@
 Introduction to the MediCurator
 *******************************
 
+Preface
+#######
+
 This page is intended to give an overall idea and the motivation behind the inception of MediCurator platform.
 
 Introduction
