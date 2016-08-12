@@ -67,7 +67,8 @@ MediCurator Installation
 
 .. toctree::
    :maxdepth: 2
-   sections/Installation
+
+    sections/Installation
 
 
 MediCurator for Users

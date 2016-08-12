@@ -25,4 +25,6 @@ Details can be found below:
    restapi/Retrieve
    restapi/Update
    restapi/Delete
-
+   restapi/download
+   restapi/add
+   restapi/duplicate
