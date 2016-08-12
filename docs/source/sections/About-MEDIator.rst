@@ -1,140 +1,76 @@
-******************************************************
-Introduction to the MEDIator Data Replication Platform
-******************************************************
+*******************************
+Introduction to the MediCurator
+*******************************
 
-This page is intended to give an overall idea and the motivation behind the inception of MEDIator platform.
+This page is intended to give an overall idea and the motivation behind the inception of MediCurator platform.
 
 Introduction
 ############
 
-Radiomics and Radiogenomics research requires large amounts of well curated, high quality, imaging and
-genomic data. The typical workflow involves downloading the data from a public repository, or the data
-warehouse of the data coordination site, and processing and analyzing the data on local compute clusters. As
-new data is added by the data providers, it is often left to the individual investigator to track and download
-new data. Since these research studies are often multi-investigator, research groups often designate a point-
-person as the local ‘project-specific’ data disseminators, who in turn set local databases/spreadsheets/
-dropbox accounts to track the data downloads. This rather inefficient and error-prone workflow is necessary
-because there are no good systems to share data amongst investigators and collaborators. Finally, upon
-conclusion of study, investigators rarely have a good way to identify the specific subset of data (from the
-centralized repository/DCC) that was used in their project. In the absence of a good way to publish their
-data, it becomes difficult to reproduce scientific studies.
+Near duplicate detection algorithms have been proposed and implemented in order to detect and eliminate duplicate entries from massive datasets. Due to the differences in data representation (such as measurement units) across different data sources, potential duplicates may not be textually identical, even though they refer to the same real-world entity. As data warehouses typically contain data coming from several heterogeneous data sources, detecting near duplicates in a data warehouse requires a consider- able memory and processing power.
 
-The purpose of this project was to develop a system that could provide data repositories and DCC with a
-seamless, and transparent, approach to give their users the ability to share and publish research data — a
-one-way Dropbox like environment for the community which gives researchers the ability to share data
-subsets, track and download updates, and publish data.
+Traditionally, near duplicate detection algorithms are sequential and operate on a single computer. Now, In-Memory Data Grids (IMDG) offer a distributed storage and execution, giving the illusion of a single large computer over multiple computing nodes in a cluster. However, common distribution strategy and framework to parallelize the execution of the near duplicate detection algorithms is still lacking.
 
+This paper presents the research, design, and implementation of MediCurator. MediCurator is a distributed near duplicate detection framework for heterogeneous medical data sources in constructing data warehouses. MediCurator has been developed to retrieve medical data from various data sources, including MySQL, MongoDB, CSV files, and medical image archives such as TCIA, and detect the duplicates in-memory, while storing the merged data into data warehouses hosted in Hadoop Distributed File System. As a unified near duplicate detection framework for big data, Medicurator efficiently distributes the algorithms over utility computers in research labs and private clouds and grids. 
 
 Methods
 #######
 
-The primary design construct of MEDIator is a system for the creation, access and update of replica sets.
-Replica sets can be thought of as pointers that consist of metadata-tuples that can be used to uniquely
-identify and point to data. It points to a chosen subset of data, that is stored in one or more homogeneous/
-heterogeneous data sources. When using replica sets, no raw data is duplicated, and only the pointers to the
-data are shared. Data consumers share the identifiers among the other interested data consumers. Replica
-sets and identifiers are stored in a distributed storage offered by MEDIator. As the data and execution is
-distributed among multiple computing nodes, parallel execution of thousands of queries are enabled
-without a performance degrade.
 
-Data providers are responsible for identifying metadata that is used to describe and access the raw data.
-Existing replica sets can be updated for each of the data sources, at the specified granularity of metadata.
-
-While only the data consumers with the credentials (often those who created the replica set) can expose,
-update, or delete the existing replica sets, public replica sets can be duplicated by the other consumers.
-MEDIator data replication mechanism consists of 3 APIs: a) An Interface API provides a generic interface that
-can be used by a data provider, or a DCC, to integrate with their data management system. The
-implementation of this interface is used to query the metadata and retrieve the raw data. b) A PubCons API
-that can be used by data consumers, to help create, update, and delete replica sets, at varying granularity. c)
-An Integrator API that integrates data, and allows replica sets to be created from multiple data sources. Each
-replica set is represented as a hierarchical tree structure where each data source is mapped as a sub-tree.
-Leaves of the tree point to metadata at different granularity. Multiple homogeneous data sources can
-leverage a single implementation of the PubCons API, where heterogeneous data sources are integrated as
-sub trees of the replica set by invoking the relevant implementation of PubCons API for each of the data
-source.
-
-We also provide an SDK to enable the creation of replica sets effectively through native Java and Python
-interfaces. This allows developers, of platforms such as 3DSlicer (a medical imaging research workstation)
-and Galaxy, to easily integrate the data sharing capability into their respective applications. Such native
-access allows their users to exchange data amongst collaborators without explicitly moving large amounts of
-data.
-
-Finally, we provide users the ability to publish a replica set and associate it with a Digital Object Identifier. A
-published replica-set is immutable, and the act of publishing makes the replica-set read-only. Before a DOI
-can be generated, the publisher is also prompted to provide some metadata.
+MediCurator integrates medical data from various heterogeneous medical data sources and private archives using the public APIs offered by the data sources, and curates the integrated data into a data warehouse for public access, while storing the detected duplicate pairs into a separate data source.
 
 
+**Definition of the ReplicaSet**
 
-Evaluation
-##########
+Repliaset is the directory which contents the user's interested information.
 
-MEDIator was tested against TCIA, Amazon S3, and both TCIA and Amazon S3 together. It was evaluated in a cluster up to 6
-identical nodes of servers with Intel® CoreTM i7-2600K CPU @ 3.40GHz and 12 GB memory. Data sources up to 300 GB from
-TCIA consisting of around 100000 image files and S3 were used in the evaluations.
+A user can have many replicasets which serves for different researches. The information in a replicaset can be downloaded, detected near duplicate on and removed and so on. Also, a user can add any interested information of any data source into the replicaset. 
 
-.. image:: eval.png
-   :scale: 80
-   :align: center
+In one word, replicaset is a important operating unit which the user can do many operations on.
 
 
+Below is the architecture of the MediCurator:
 
-Results
-#######
+.. image:: architecture.png
+   :scale: 100
+   :align: center   
 
-The implementation demonstrates the extensibility and efficiency of MEDIator in integrating and sharing data
-from multiple heterogeneous data source among the data consumers. As a sample data sharing scenario, we
-deployed MEDIator against three heterogeneous biomedical image sources. The data sources were: a)
-Radiology data from The Cancer Imaging Archive; b) digital pathology images in caMicroscope; and c)
-sequence data that was stored in Amazon S3 buckets. While the genomic data was stored in S3 buckets, the
-corresponding clinical data (used as metadata) was stored as CSV files.
+MediCurator detects the duplicates by analyzing the potential data pairs from the original data sources, using similarity matrices for textual data. It uses the hierarchical meta data attached to the binary medical data to identify, classify, and find duplicates among the binary raw data.
 
-TCIA and caMicroscope provide robust data management services, including a set of RESTful APIs are used to
-query the images and the relevant metadata. The genomic data was stored as Amazon S3 blobs and linked to
-metadata (clinical data) that was stored as CSV files. The CSV files themselves were integrated and queried
-through CSVIntegrator, an implementation of IntegratorAPI to read and parse the CSV meta files. The meta
-files were read and stored in the distributed in-memory grid of MEDIator for easy access to minimize the
-performance overhead caused by the frequent disk access.
+About the download tracking, Medicurator supposes all kinds of dataset are managed in a hierarchy manner for example, in TCIA , there are collections, Series and so on. Every hierarchy has a specific name to make it distinguished. Also, take the TCIA for example, there are collection name, SeriesID. So, all the dataset can be maintained in a tree structure. The leaf node repre- sents the data to be downloaded. Every replicate set is the set the subtrees. To be easily understood, we show an ex- ample - TCIAs replicate set collection 1, patient 1, study 1, series 1 shown in the picture fig 3. A download request will download all the data in a replicate set. To avoid download repeatedly, Medicura- tor creates a tree index for a user, initialize only have a root node - TCIA,as shown in fig 4. And then, some download flow begins, Medicu- rator dynamically adds the node to this tree. In this way, Medicurator can inspect the data we have down- loaded. Considering that Medicura- tor already has a tree recording the data it has downloaded, when it down- load other data afterwards, for exam- ple, if the user wants download col- lection 2, Medicurator recursively in- quires the child of this node, if pa- tients 1 has been downloaded, Medi- curator ignores it, and go to patient 2.
 
-The pilot project used ~100000 image files and nearly 300GB of data. The result of this pilot project
-illustrated the robustness of the MEDIator system in integrating multiple, diverse data sources (including a
-cloud based data source), and provide users the ability to share subsets of data without an explicit download
-of data.
+.. image:: 2.png
+   :scale: 40
+   :align: left
+.. image:: 3.png
+   :scale: 40
+   :align: right
+
+
+MediCurator is deployed as a cluster, built on Infinispan In-Memory Data Grid, such that it finds the similarity among the entries in an efficient parallel and distributed manner. Also, you can decide the storage that the MediCurator uses, the HDFS or the local storage. 
+
+Due to its architecture, MediCurator offers a speed-up of ten-folds, compared to the existing solutions such as MPI systems.
+
+Result 
+######
+
+MediCurator is a complete near duplicate metadata/image detection system with good robustness and high horizontal scalability, supporting medical image archives,MySQL, MongoDB, CSV files, and medical image archives such as TCIA and more kinds of data.
+ 
+It can efficiently detect the duplicates，download the updated the images and avoid downloading the same information which has been downloaded before.
 
 
 Discussion
 ##########
 
-In this project we present an extensible, and transparent system, that gives data publishers the ability to
-allow their users to share data, without explicitly downloading and distributing data. Such a lightweight approach
-provides ubiquitous access to medical metadata from the radiomics/radiogenomics archives, while
-providing fault tolerance and load balancing, leveraging the distributed shared memory platforms. As new
-data is added by data providers, replica sets can be easily updated. This allows consumers to access and
-download only the data that was updated. Finally, we provide data consumers, the ability to ‘publish’ data
-used in their studies. In this model of publishing data, a consumer does not upload data. Instead they
-identify the data subset that was used in specific study. This model encourages reproducibility in science and
-easier access to the data used in projects.
+Data is published to various data sources by the medical data publishers through the respective write APIs of the data sources. 
+
+MediCurator connects to the original data sources through their read APIs. It has multiple data sources providing the raw input data. Output is written to the data warehouse as well as the duplicate pairs stored in a separate data source, using the store APIs of the relevant data sources. Medical data consumers consume the data from the warehouse composed by MediCurator through its read API. The data warehouse is considered to be free from the duplicates, though false positives and false negatives may occur based on the effectiveness of the similarity matrices and similarity join algorithms used.
 
 
 Conclusion
 ##########
 
-The emerging research domains of radiomics and radiogenomics place a heavy emphasis on the need for
-large scale, well curated information repositories. Our work demonstrates a novel approach to sharing and
-accessing subsets of data stored in such repositories. Our motivating premise is that such novel mechanisms
-to share data, will encourage data reuse, as well as streamline access to data from algorithms.
+MediCurator is a platform for distributed near duplicate detection that detects duplicate entries from multiple medical data sources when constructing a medical data warehouse by integrating those primary data sources. MediCurator functions as an integration middleware for data warehouse construction with duplicate detection and elimination, from the raw textual medical data, or the binary data by leveraging the meta data attached to it.
+ 
+What’s more, it provides faster near duplicate detection over big data compared to the respective sequential execution of the algorithms, while enabling executions on massive datasets which would not have been possible to execute on utility computers. Although Medicurator has been developed for near duplicate detection for big data, it can be generalized for any data-intensive big data scenario as an adaptive distributed execution framework. 
 
-MEDIator is a platform for sharing medical images across multiple users by merely sharing the metadata, from the
-heterogeneous image archives by leveraging the distributed shared memory platforms. The design can also be implemented
-for any other data sources having an index to query and structure them as replica sets.
-
-
-Tentative Action Items
-######################
-
-Public Release: Summer 2016 (TCIA)
-
-Integrate with NIH Genomic Data Commons
-
-Persist Replica Sets
-
-Associate Digital Object Identifiers with Replica Sets

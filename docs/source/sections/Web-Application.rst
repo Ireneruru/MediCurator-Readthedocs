@@ -1,16 +1,17 @@
 ************************
-MEDIator Web Application
+MediCurator Web Application
 ************************
 
-In order to execute the MEDIator web application, run the below command.
+In order to execute the MediCurator web application, run the below command.
 
-sh modules/repl-server/target/bin/webapp
+    $./run_servlet.sh
+
+The details can be found on the page Installation and Execution of MediCurator.
+
+The dashboard is shown as below:
+
+.. image:: Dashboard.png
+   :scale: 140
+   :align: center
 
 
-To access the MEDIator web application, go to http://localhost:<EMBEDDED_TOMCAT_PORT>/mediator/ using your browser.
-
-
-You may run the Initiator class in parallel, to create a MEDIator cluster in both cases.
-
-
-You will be required to run MEDIator server as a super-user if you choose to have the port to be below 1024.

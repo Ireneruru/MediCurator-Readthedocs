@@ -1,35 +1,32 @@
-******************
-Delete Replica Set
-******************
+******
+Delete
+******
 
-An existing replica set can be deleted by invoking the relevant DELETE REST API, following the format of,
+Remove Dataset from replica Set
+###############################
 
-/DELETE
+    http://localhost:4567/removeDataSet?replicasetID=***&datasetID=***
 
-/replicaset/:id"
+remove the Dataset from the replicaset but not delete from the storage
 
+return the status of the operation "succeed" or "failure"
 
-The replica set with the given ID would be deleted.
+Delete Dataset
+##############
 
+    http://localhost:4567/deleteDataSets?datasetID=***
 
-For the ease of expression, port 9090 is used as an example in all the examples below.
+recursively delete the Dataset and you can download again 
 
-Make sure to replace 9090 above with the correct value as defined in REST_PORT in MEDIator CommonConstants.
+return the status of the operation "succeed" or "failure"
 
+Delete the images under a dataset
+#################################
 
+    http://localhost:4567/deleteOneDataSet?datasetID=***
 
-**Sample DELETE request**
+Only Delete the images below the dataset 
 
-http://localhost:9090/replicaset/12?replicaSetID=-9176938584709039161
-
-
-**Sample DELETE response**
-
-true
-
-or
-
-false
+return the status of the operation "succeed" or "failure"
 
 
-True, if successfully deleted the replica set with the given ID, and false if the delete failed for some reason.
