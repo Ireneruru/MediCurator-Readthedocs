@@ -40,10 +40,11 @@ MediCurator detects the duplicates by analyzing the potential data pairs from th
 About the download tracking, Medicurator supposes all kinds of dataset are managed in a hierarchy manner for example, in TCIA , there are collections, Series and so on. Every hierarchy has a specific name to make it distinguished. Also, take the TCIA for example, there are collection name, SeriesID. So, all the dataset can be maintained in a tree structure. The leaf node repre- sents the data to be downloaded. Every replicate set is the set the subtrees. To be easily understood, we show an ex- ample - TCIAs replicate set collection 1, patient 1, study 1, series 1 shown in the picture fig 3. A download request will download all the data in a replicate set. To avoid download repeatedly, Medicura- tor creates a tree index for a user, initialize only have a root node - TCIA,as shown in fig 4. And then, some download flow begins, Medicu- rator dynamically adds the node to this tree. In this way, Medicurator can inspect the data we have down- loaded. Considering that Medicura- tor already has a tree recording the data it has downloaded, when it down- load other data afterwards, for exam- ple, if the user wants download col- lection 2, Medicurator recursively in- quires the child of this node, if pa- tients 1 has been downloaded, Medi- curator ignores it, and go to patient 2.
 
 .. image:: 2.png
-   :scale: 40
-   :align: left
+   :scale: 140
+   :align: center
+
 .. image:: 3.png
-   :scale: 40
+   :scale: 140
    :align: right
 
 
