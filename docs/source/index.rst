@@ -56,7 +56,7 @@ MediCurator Research
 ####################
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    sections/Usecase
    sections/About-MediCurator
@@ -66,7 +66,7 @@ MediCurator Installation
 ########################
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    sections/Installation
 
@@ -77,7 +77,7 @@ MediCurator for Users
 You can easily use MediCurator, because it is very user-friendly. It offers two main ways for you to choose, Rest API and Web-Application.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    sections/MediCurator-REST-API
    sections/Web-Application
@@ -89,7 +89,7 @@ MediCurator for Developers
 MediCurator version 1.0 has extensively been developed for some specific environments while maintaining relevant interfaces for extension to the other conditions.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    sections/Data-Sources
    sections/Image formats
