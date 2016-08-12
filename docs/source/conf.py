@@ -108,7 +108,7 @@ rst_epilog = """
 
 .. container:: isbcgcfooter
 
-  Have feedback or corrections?  Email us at pkathi2@emory.edu.
+  Have feedback or corrections?  Email us at chen1ru@pku.edu.cn.
 
 .. GLOBAL LINK REPLACEMENTS CAN GO HERE
 
@@ -310,7 +310,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   (master_doc, 'MediCurator', u'MediCurator',
-   author, 'mediator', 'One line description of project.',
+   author, 'MediCurator', 'One line description of project.',
    'Miscellaneous'),
 ]
 

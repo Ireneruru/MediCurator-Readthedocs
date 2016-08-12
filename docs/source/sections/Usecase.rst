@@ -4,16 +4,14 @@ Use case
 
 Data is published to various data sources by the medical data publishers through the respective write APIs of the data sources. MediCurator connects to the original data sources through their read APIs. 
 
-***********
 Replica set
-***********
+###########
 Replica sets is the important concept that drives MediCurator.
 
 A user can have plenty of Replica sets. The user can create it, namne it, remove it, add datasets to it and detect duplicates between any two replica sets.
 
-*****************
 Research Use Case
-*****************
+#################
 The researcher first demonstrates the source of the data and the storage of the information. These are necessary. Then he can perform some operations on MediCurator like the picture below.
 
 .. image:: Usecase.png

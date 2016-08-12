@@ -73,6 +73,8 @@ MediCurator Installation
 MediCurator for Users
 ##################
 
+You can easily use MediCurator, because it is very user-friendly. It offers two main ways for you to choose, Rest API and Web-Application.
+
 .. toctree::
    :maxdepth: 2
 
@@ -83,6 +85,7 @@ MediCurator for Users
 
 MediCurator for Developers
 #######################
+MediCurator version 1.0 has extensively been developed for some specific environments while maintaining relevant interfaces for extension to the other conditions.
 
 .. toctree::
    :maxdepth: 2
