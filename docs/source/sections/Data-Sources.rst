@@ -43,7 +43,7 @@ Since you want to change a data source, you should change the function: "getSubs
 
 In this way, you can have extension to any other data source as you want.
 
-DICOMweb is the web standard for medical imaging. Since it has become more and more popular, now talk about it more detailly.
+DICOMWeb is the web standard for medical imaging. Since it has become more and more popular, now talk about it more detailly.
 
 DICOMWeb has two main kinds of API that will be used, retrieve and download.
 
@@ -58,7 +58,7 @@ In DICOMWebDataSource.java:
 
 In DICOMWebDataSet.java:
 
-    you should at least implement the function:
+    you should at least implement the functions:
 
     public abstract UUID getParent();
     public abstract UUID[] getSubsets();
@@ -66,8 +66,8 @@ In DICOMWebDataSet.java:
     public abstract boolean updated();
     public abstract String getKeyword();
 
-The function getSubsets() and getImage() is the most complicate because you should make use it to make the DICOMWeb and MediCurator unify.
+The function getSubsets() and getImage() is the most complicate because you should use it to make the DICOMWeb and MediCurator unify.
 
-Besides, you can some more classes, such as DICOMWebQuery to help you parse the API. This is up to your coding style.
+Besides, you can add some more classes, such as DICOMWebQuery to help you parse the API. This is up to your coding style.
 
 
