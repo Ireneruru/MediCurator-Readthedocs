@@ -18,7 +18,7 @@ If you want to extend to other data sources, you should finish the abstract func
 Take tcia for example,
      it add the function: 
     
-    //DataSource type is 'tcia'
+    //DataSource type is 'tcia' 
     public TciaDataSource()
     {
 	super("tcia");
@@ -42,3 +42,32 @@ This is not enough.
 Since you want to change a data source, you should change the function: "getSubsets" and the method to modify the "boolean updated" in the DataSet.java.
 
 In this way, you can have extension to any other data source as you want.
+
+DICOMweb is the web standard for medical imaging. Since it has become more and more popular, now talk about it more detailly.
+
+DICOMWeb has two main kinds of API that will be used, retrieve and download.
+
+To extend to DICOMWeb, you should add a DICOMWebDataSource.java
+and DICOMWebDataSet.java basicly.
+
+In DICOMWebDataSource.java:
+
+    you should at least implement the function:
+
+    public abstract UUID getRootDataSet();
+
+In DICOMWebDataSet.java:
+
+    you should at least implement the function:
+
+    public abstract UUID getParent();
+    public abstract UUID[] getSubsets();
+    public abstract UUID[] getImages();
+    public abstract boolean updated();
+    public abstract String getKeyword();
+
+The function getSubsets() and getImage() is the most complicate because you should make use it to make the DICOMWeb and MediCurator unify.
+
+Besides, you can some more classes, such as DICOMWebQuery to help you parse the API. This is up to your coding style.
+
+
